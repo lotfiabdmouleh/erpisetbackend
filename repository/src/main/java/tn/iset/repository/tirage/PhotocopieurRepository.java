@@ -10,6 +10,6 @@ import tn.iset.model.tirage.Photocopieur;
 
 public interface PhotocopieurRepository extends JpaRepository<Photocopieur, Long> {
 	@Query(value=" SELECT SUM(d.nb_copie*d.nbPages) FROM  Tirage t join t.demandeTirages as  d WHERE t.photocopieur.id= :ph")
-	Long getdemvalide(
+	Long getSUMCopie(
 			@Param("ph")Long ph);
 }

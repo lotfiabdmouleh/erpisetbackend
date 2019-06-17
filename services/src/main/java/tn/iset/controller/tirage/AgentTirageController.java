@@ -102,7 +102,6 @@ public class AgentTirageController {
 			User user = new AgentTirage();
 			user.setEmail(signUpRequest.getEmail());
 			user.setName(signUpRequest.getName());
-			user.setPassword(encoder.encode(signUpRequest.getPassword()));
 			user.setUsername(signUpRequest.getUsername());
 			user.setTel((long)signUpRequest.getTel());
 			

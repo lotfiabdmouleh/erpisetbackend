@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import tn.iset.controller.MailController;
 import tn.iset.message.request.SignUpForm;
 import tn.iset.message.response.ResponseMessage;
 import tn.iset.model.Role;
@@ -53,6 +54,8 @@ public class EnseignentController  {
 	private UserRepository userRepository;
 	@Autowired
 	RoleRepository roleRepository;
+	@Autowired
+	MailController mailController;
 	public EnseignentController ( EnseignantRepository enseignantRepository) {
 		super();
 		this.enseignantRepository = enseignantRepository;
@@ -114,7 +117,7 @@ public class EnseignentController  {
 			User user = new Enseignant();
 			user.setEmail(signUpRequest.getEmail());
 			user.setName(signUpRequest.getName());
-			user.setPassword(encoder.encode(signUpRequest.getPassword()));
+			//user.setPassword(encoder.encode(signUpRequest.getPassword()));
 			user.setUsername(signUpRequest.getUsername());
 			user.setTel((long)signUpRequest.getTel());
 			
@@ -129,7 +132,7 @@ public class EnseignentController  {
 
 			user.setRoles(roles);
 			userRepository.save((Enseignant) user);
-
+			mailController.sendSimpleEmail(user.getUsername());
 			return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
 		}
 

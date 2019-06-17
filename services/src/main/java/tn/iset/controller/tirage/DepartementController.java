@@ -79,6 +79,7 @@ public class DepartementController  {
 	    public void delete(@PathVariable Long id) {
 	    	departementRepository.deleteById(id);
 	    }
+	   
 	    
 @GetMapping("/history")
 @ResponseBody
@@ -93,5 +94,6 @@ public List gethistory(){
            .getResultList();
 	
 	return revisions;
-}}
+}
+}
 	

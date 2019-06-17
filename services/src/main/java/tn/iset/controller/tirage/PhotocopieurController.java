@@ -82,7 +82,7 @@ public class PhotocopieurController  {
 	    @GetMapping("/getnb/{ph}")
 	    @ResponseBody
 	    public Long getnb(@PathVariable Long ph) {
-	    	return photocopieurRepository.getdemvalide(ph);
+	    	return photocopieurRepository.getSUMCopie(ph);
 	    }
 	    
 		@GetMapping("/history")

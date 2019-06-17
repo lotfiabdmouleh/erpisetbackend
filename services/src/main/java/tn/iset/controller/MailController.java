@@ -30,7 +30,7 @@ public class MailController {
 	
 	    @ResponseBody
 	    @RequestMapping("/send/{username}")
-	    public ResponseEntity<?> sendSimpleEmail(@PathVariable String username) {
+	    public ResponseEntity<Object> sendSimpleEmail(@PathVariable String username) {
 	    	User u=userRepo.findByUsername(username).get();
 	    	Random random = new Random(); 
 	    	String generatePin = String.format("%04d", random.nextInt(10000));
@@ -46,6 +46,6 @@ public class MailController {
 	        // Send Message!
 	        this.emailSender.send(message);
 	 
-	        return  new ResponseEntity<>(new ResponseMessage("email sent successfully!"), HttpStatus.OK);
+	        return  new ResponseEntity<Object>(new ResponseMessage("email sent successfully!"), HttpStatus.OK);
 	    }
 }

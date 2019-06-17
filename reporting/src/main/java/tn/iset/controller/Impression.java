@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,9 +34,9 @@ public class Impression {
 	
 		@Autowired
 	private DataSource datasource;
-		@RequestMapping(value="/Liste")
-		 private HttpEntity<byte[]> Agent() throws JRException, IOException, ClassNotFoundException, SQLException{
-			InputStream input=this.getClass().getResourceAsStream("rep.jrxml");
+		@RequestMapping(value="/Liste/{nom}")
+		 private HttpEntity<byte[]> Agent(@PathVariable String nom) throws JRException, IOException, ClassNotFoundException, SQLException{
+			InputStream input=this.getClass().getResourceAsStream(nom);
 			JasperDesign design=JRXmlLoader.load(input);
 		JasperReport jasperReport = JasperCompileManager.compileReport(design);
 		JasperPrint jasperPrint=JasperFillManager.fillReport(jasperReport,null,datasource.getConnection());

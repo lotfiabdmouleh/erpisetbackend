@@ -54,7 +54,31 @@ public class DemandeTirageController  {
 		
 		return demandeTirageRepository.findAll();
 	}
-   
+	@PreAuthorize("hasRole('ADMIN')")
+	 @GetMapping("/nbrcopie/{id}")
+	    @ResponseBody
+	    public Long getnbr(@PathVariable Long id){
+	    	return demandeTirageRepository.getCopieParDep("document imprim", id);
+	    }
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	 @GetMapping("/nbrcopiedep")
+	    @ResponseBody
+	    public List getnbrdep(){
+	    	return demandeTirageRepository.getCopieDep("document imprim");
+	    }
+	@PreAuthorize("hasRole('ADMIN')")
+	 @GetMapping("/nbrcopiemat")
+	    @ResponseBody
+	    public List getnbrmat(){
+	    	return demandeTirageRepository.getCopieMat("document imprim");
+	    }
+	@PreAuthorize("hasRole('ADMIN')")
+	 @GetMapping("/nbrcopieens")
+	    @ResponseBody
+	    public List getnbrens(){
+	    	return demandeTirageRepository.getCopieEns("document imprim"); 
+	    }
 	@GetMapping("/{id}")
 	public DemandeTirage get(@PathVariable Long id) {
 		

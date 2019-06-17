@@ -96,7 +96,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-        <mainClass>com.main.SecurityDbExampleApplication</mainClass>
+        <mainClass>tn.iset.SecurityDbExampleApplication</mainClass>
         <layout>ZIP</layout>
       </configuration>
       <executions>
