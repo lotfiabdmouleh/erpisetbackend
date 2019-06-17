@@ -6,6 +6,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>services</artifactId>
+  <packaging>war</packaging>
   <dependencies>
   <dependency>
     <groupId>org.apache.pdfbox</groupId>
@@ -98,6 +99,7 @@
 				<configuration>
         <mainClass>tn.iset.SecurityDbExampleApplication</mainClass>
         <layout>ZIP</layout>
+        
       </configuration>
       <executions>
         <execution>
