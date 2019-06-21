@@ -1,5 +1,6 @@
 package tn.iset.controller.tirage;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -102,7 +103,7 @@ public class EnseignentController  {
 	    }
 	  
 	    @PostMapping
-	    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
+	    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) throws NoSuchAlgorithmException {
 			if (userRepository.existsByUsername(signUpRequest.getUsername())) {
 				return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
 						HttpStatus.BAD_REQUEST);

@@ -85,6 +85,12 @@ public class PhotocopieurController  {
 	    	return photocopieurRepository.getSUMCopie(ph);
 	    }
 	    
+	    @GetMapping("/getphline/{ph}")
+	    @ResponseBody
+	    public List getPh(@PathVariable Long ph) {
+	    	return photocopieurRepository.getPhLine(ph);
+	    }
+	    
 		@GetMapping("/history")
 		@ResponseBody
 		public List gethistory(){

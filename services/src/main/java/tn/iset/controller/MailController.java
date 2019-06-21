@@ -1,5 +1,7 @@
 package tn.iset.controller;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +32,9 @@ public class MailController {
 	
 	    @ResponseBody
 	    @RequestMapping("/send/{username}")
-	    public ResponseEntity<Object> sendSimpleEmail(@PathVariable String username) {
+	    public ResponseEntity<Object> sendSimpleEmail(@PathVariable String username) throws NoSuchAlgorithmException {
 	    	User u=userRepo.findByUsername(username).get();
-	    	Random random = new Random(); 
+	    	Random random =  SecureRandom.getInstanceStrong(); 
 	    	String generatePin = String.format("%04d", random.nextInt(10000));
 	    	u.setPassword(encoder.encode(username+generatePin));
 	    	userRepo.save(u);

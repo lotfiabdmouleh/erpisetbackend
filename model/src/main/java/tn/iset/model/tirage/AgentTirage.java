@@ -3,6 +3,7 @@ package tn.iset.model.tirage;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -15,10 +16,10 @@ import tn.iset.model.User;
 @Entity
 public class AgentTirage extends User {
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Tirage> tirages;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Consommable> consommables;
 
     public List<Consommable> getConsommables() {

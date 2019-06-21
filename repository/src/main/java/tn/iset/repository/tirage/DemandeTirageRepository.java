@@ -1,5 +1,6 @@
 package tn.iset.repository.tirage;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,7 +24,16 @@ public interface DemandeTirageRepository extends JpaRepository<DemandeTirage, Lo
 	@Query(value=" SELECT    d.enseignement.enseignant.name,  SUM(d.nb_copie*d.nbPages) as somme FROM  DemandeTirage d  WHERE d.etat like %:type% GROUP BY d.enseignement.enseignant.name ORDER BY somme DESC ")
 	List getCopieEns(@Param("type")String type);
 	
+	@Query(value=" SELECT  d.enseignement.enseignant.name,  SUM(d.nb_copie*d.nbPages) as somme FROM  DemandeTirage d  WHERE d.etat like %:type% AND d.DateAjout BETWEEN :startDate AND :endDate GROUP BY d.enseignement.enseignant.name ORDER BY somme DESC ")
+	List getCopieEnsParDate(@Param("type")String type,@Param("startDate")Date startDate,@Param("endDate")Date endDate);
+	
 	@Query(value=" SELECT    d.enseignement.matiere.nom_mat,  SUM(d.nb_copie*d.nbPages) as somme FROM  DemandeTirage d  WHERE d.etat like %:type% GROUP BY d.enseignement.matiere.nom_mat ORDER BY somme DESC ")
 	List getCopieMat(@Param("type")String type);
 
+	@Query(value=" SELECT d.enseignement.departement.nom_dep,  SUM(d.nb_copie*d.nbPages) as somme FROM  DemandeTirage d  WHERE d.etat like %:type% AND d.DateAjout BETWEEN :startDate AND :endDate GROUP BY  d.enseignement.departement.nom_dep ORDER BY somme DESC ")
+	List getCopieDepParDate(@Param("type")String type,@Param("startDate")Date startDate,@Param("endDate")Date endDate);
+	
+	@Query(value=" SELECT d.enseignement.matiere.nom_mat,  SUM(d.nb_copie*d.nbPages) as somme FROM  DemandeTirage d  WHERE d.etat like %:type% AND d.DateAjout BETWEEN :startDate AND :endDate GROUP BY  d.enseignement.matiere.nom_mat ORDER BY somme DESC ")
+	List getCopieMatParDate(@Param("type")String type,@Param("startDate")Date startDate,@Param("endDate")Date endDate);
+	
 }

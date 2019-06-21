@@ -2,16 +2,19 @@
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rappdep" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="80786986-246e-4622-ab1d-e3f058e4a1d9">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<parameter name="datedebut" class="java.util.Date"/>
+	<parameter name="datefin" class="java.util.Date"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT pfe.departement.nom_dep,
 	SUM( pfe.demande_tirage.nb_pages * pfe.demande_tirage.nb_copie) as somme
 FROM pfe.demande_tirage,
 	pfe.departement,
-	pfe.enseignement
+	pfe.enseignement 
 WHERE 
 	 pfe.enseignement.departement_id = pfe.departement.id 
 	 AND pfe.enseignement.id = pfe.demande_tirage.enseignement_id 
 	 AND pfe.demande_tirage.etat LIKE '%Document imp%'
+	  AND pfe.demande_tirage.date_ajout BETWEEN $P{datedebut} AND $P{datefin}
 	 GROUP BY pfe.departement.nom_dep
 	 ORDER BY somme DESC]]>
 	</queryString>

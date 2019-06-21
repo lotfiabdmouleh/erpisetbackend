@@ -66,10 +66,13 @@ PasswordEncoder encoder;
 
 		if (!agentOptional.isPresent())
 			return ResponseEntity.notFound().build();
-
-		user.setId(id);
+User u =userRepo.findById(id).get();
+u.setEmail(user.getEmail());
+u.setName(user.getName());
+u.setUsername(user.getUsername());
+		u.setId(id);
 		
-		userRepo.save(user);
+		userRepo.save(u);
 		 
 		return ResponseEntity.noContent().build();
 	    }

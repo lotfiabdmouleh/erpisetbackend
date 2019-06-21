@@ -1,6 +1,11 @@
 package tn.iset.controller.tirage;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -139,7 +144,17 @@ public class EnseignementController  {
 @GetMapping("/user/{username}")
 @ResponseBody
 public List getUser(@Valid @PathVariable String username) {
-	return enseignementRepository.getEns(username);
+	int s=0;
+	String a="";
+	if((Calendar.getInstance().get(Calendar.MONTH)+1) >8 && (Calendar.getInstance().get(Calendar.MONTH)+1)<=12) {
+		 s =1;
+		 a=Calendar.getInstance().get(Calendar.YEAR)+"/"+Calendar.getInstance().get(Calendar.YEAR);
+	}
+	if((Calendar.getInstance().get(Calendar.MONTH)+1)>=1 && (Calendar.getInstance().get(Calendar.MONTH)+1)<=6) {
+		 s =2;
+		 a=Calendar.getInstance().get(Calendar.YEAR)-1+"/"+Calendar.getInstance().get(Calendar.YEAR);
+	}
+	return enseignementRepository.getEns(username,s,a);
 }
 	    
 @GetMapping("/history")

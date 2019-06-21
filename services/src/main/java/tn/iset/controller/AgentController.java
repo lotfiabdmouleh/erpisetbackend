@@ -71,8 +71,8 @@ public class AgentController {
 	    }
 	  
 	    @PostMapping
-	    public void post(@Valid @RequestBody Agent agent) {
-	    		agentRepository.save(agent);
+	    public Agent post(@Valid @RequestBody Agent agent) {
+	    		return agentRepository.save(agent);
 
 	    }
 	    

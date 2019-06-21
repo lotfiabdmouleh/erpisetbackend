@@ -1,5 +1,6 @@
 package tn.iset.model.tirage;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.iset.model.tirage.Ancre;
+import tn.iset.model.tirage.Recharge;
 import tn.iset.repository.tirage.AncreRepository;
+import tn.iset.repository.tirage.RechargeRepository;
 
  @CrossOrigin("*")
 
@@ -34,6 +36,8 @@ import tn.iset.repository.tirage.AncreRepository;
 
 	@Autowired
 	private AncreRepository ancrerepo;
+	@Autowired
+	private RechargeRepository rechargeRepository;
 	@Autowired
 	private EntityManager entityManager;
 
@@ -76,6 +80,8 @@ import tn.iset.repository.tirage.AncreRepository;
 	    
 	    @DeleteMapping("/{id}")
 	    public void delete(@PathVariable Long id) {
+	    	
+	    	
 	        ancrerepo.deleteById(id);
 	    }
 			    
