@@ -121,7 +121,7 @@ public class DemandeTirageController  {
 		Date debut=formatter.parse(d);
 		Date fin=formatter.parse(ff);
 	
-	    	return demandeTirageRepository.getCopieDepParDate("document imprim",debut,fin); 
+	    	return demandeTirageRepository.getCopieMatParDate("document imprim",debut,fin); 
 	    }
 	
 	@GetMapping("/{id}")

@@ -38,7 +38,7 @@ WHERE
 		<band height="100" splitType="Stretch">
 			<image>
 				<reportElement x="22" y="0" width="510" height="80" uuid="e0c0bc21-00e9-41a8-a2c4-65113c3bba0f"/>
-				<imageExpression><![CDATA["C:/Users/bahri/JaspersoftWorkspace/Capture.PNG"]]></imageExpression>
+				<imageExpression><![CDATA["C:/upload-dir/Capture.PNG"]]></imageExpression>
 			</image>
 		</band>
 	</title>
