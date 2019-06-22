@@ -38,14 +38,12 @@ public class MailController {
 	    	String generatePin = String.format("%04d", random.nextInt(10000));
 	    	u.setPassword(encoder.encode(username+generatePin));
 	    	userRepo.save(u);
-	        // Create a Simple MailMessage.
 	        SimpleMailMessage message = new SimpleMailMessage();
 	         
 	        message.setTo(u.getEmail());
 	        message.setSubject("Récupuration du mot de passe");
 	        message.setText("Bonjour,votre mot de passe est: "+username+generatePin);
 	 
-	        // Send Message!
 	        this.emailSender.send(message);
 	 
 	        return  new ResponseEntity<Object>(new ResponseMessage("email sent successfully!"), HttpStatus.OK);

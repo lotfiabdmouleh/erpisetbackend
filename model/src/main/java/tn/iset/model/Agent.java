@@ -3,7 +3,6 @@ package tn.iset.model;
 
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.Valid;
 
-import org.hibernate.envers.AuditOverride;
-import org.hibernate.envers.AuditOverrides;
 import org.hibernate.envers.Audited;
 
 @Audited

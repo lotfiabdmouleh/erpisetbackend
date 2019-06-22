@@ -27,11 +27,7 @@ EntityManager entityManager;
 @GetMapping("/all")
 @ResponseBody
 public List getAllHistory(){
-	/*return	entityManager.createNativeQuery("select  r.modified_by,r.revtstmp , a.revtype,m.revtype x from revinfo r,agent_aud a,matiere_aud m where a.rev=r.rev or r.rev=m.rev ")
-		
-			.getResultList();
-		}
-	*/
+	
 	List revisions = new ArrayList<>() ;
 	List entities=new ArrayList<Class<T>>();
 	entities.add(Agent.class);

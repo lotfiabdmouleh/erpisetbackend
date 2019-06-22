@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,8 +49,7 @@ public class AgentTirageController {
 	private EntityManager entityManager;
 	@Autowired
 	private UserRepository userRepository;
-	@Autowired
-	private PasswordEncoder encoder;
+	
 	@Autowired
 	RoleRepository roleRepository;
 
@@ -126,20 +124,7 @@ public class AgentTirageController {
 	        agentRepository.deleteById(id);
 	    }
 	    
-@GetMapping("/history")
-@ResponseBody
-public List gethistory(){
-	List revisions = AuditReaderFactory.get(entityManager)
-            .createQuery()
-            .forRevisionsOfEntity(AgentTirage.class, false, true)
-            //.addProjection(AuditEntity.id())
-            .addProjection( AuditEntity.revisionProperty("timestamp"))
-            .addProjection(AuditEntity.revisionProperty("modifiedBy"))
-            .addProjection(AuditEntity.revisionType())
-            .getResultList();
-	
-	return revisions;
-}
+
 	
 
 }

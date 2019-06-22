@@ -62,7 +62,7 @@ public class EnseignentController  {
 		this.enseignantRepository = enseignantRepository;
 	}
 	@GetMapping
-	@PreAuthorize("hasRole('ADMIN')or hasRole('PM')or hasRole('AGENT')")
+	@PreAuthorize("hasRole('ADMIN')or hasRole('ENSEIGNANT')or hasRole('AGENT')")
 	public List<Enseignant> getAll() {
 		
 		return enseignantRepository.findAll();
@@ -126,7 +126,7 @@ public class EnseignentController  {
 			Set<Role> roles = new HashSet<>();
 
 			 
-					Role adminRole = roleRepository.findByName(RoleName.ROLE_PM)
+					Role adminRole = roleRepository.findByName(RoleName.ROLE_ENSEIGNANT)
 							.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
 					roles.add(adminRole);
 
@@ -149,7 +149,6 @@ public List gethistory(){
 	List revisions = AuditReaderFactory.get(entityManager)
            .createQuery()
            .forRevisionsOfEntity(Enseignant.class, false, true)
-           //.addProjection(AuditEntity.id())
            .addProjection( AuditEntity.revisionProperty("timestamp"))
            .addProjection(AuditEntity.revisionProperty("modifiedBy"))
            .addProjection(AuditEntity.revisionType())

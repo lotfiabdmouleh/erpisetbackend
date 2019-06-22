@@ -80,18 +80,5 @@ public class DiversController  {
 	    	diversRepository.deleteById(id);
 	    }
 	    
-		@GetMapping("/history")
-		@ResponseBody
-		public List gethistory(){
-			List revisions = AuditReaderFactory.get(entityManager)
-		           .createQuery()
-		           .forRevisionsOfEntity(Divers.class, false, true)
-		           //.addProjection(AuditEntity.id())
-		           .addProjection( AuditEntity.revisionProperty("timestamp"))
-		           .addProjection(AuditEntity.revisionProperty("modifiedBy"))
-		           .addProjection(AuditEntity.revisionType())
-		           .getResultList();
-			
-			return revisions;
-		}}
+}
 			

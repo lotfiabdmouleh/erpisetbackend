@@ -54,7 +54,7 @@ public class DemandeTirageController  {
 		this.demandeTirageRepository = demandeTirageRepository;
 	}
 	@GetMapping
-	@PreAuthorize("hasRole('ADMIN')or hasRole('PM')or hasRole('AGENT')")
+	@PreAuthorize("hasRole('ADMIN')or hasRole('ENSEIGNANT')or hasRole('AGENT')")
 	public List<DemandeTirage> getAll() {
 		
 		return demandeTirageRepository.findAll();
@@ -129,7 +129,7 @@ public class DemandeTirageController  {
 		
 		return demandeTirageRepository.findById(id).get();
 	}
-	@PreAuthorize("hasRole('ADMIN')or hasRole('PM')")
+	@PreAuthorize("hasRole('ADMIN')or hasRole('ENSEIGNANT')")
 
 	    @PostMapping("/{file}")
 	    public void post(@Valid @PathVariable String file,@RequestBody Enseignement enseignement) throws InvalidPasswordException, IOException {
@@ -164,7 +164,7 @@ public class DemandeTirageController  {
 	    	return demandeTirageRepository.getEns(user);
 	    }
 	    
-		@PreAuthorize("hasRole('ADMIN')or hasRole('PM')")
+		@PreAuthorize("hasRole('ADMIN')or hasRole('ENSEIGNANT')")
 
 	    @DeleteMapping("/{id}")
 	    public void delete(@PathVariable Long id) {
@@ -172,20 +172,7 @@ public class DemandeTirageController  {
 	    }
 	  
 	    
-@GetMapping("/history")
-@ResponseBody
-public List gethistory(){
-	List revisions = AuditReaderFactory.get(entityManager)
-           .createQuery()
-           .forRevisionsOfEntity(DemandeTirage.class, false, true)
-           //.addProjection(AuditEntity.id())
-           .addProjection( AuditEntity.revisionProperty("timestamp"))
-           .addProjection(AuditEntity.revisionProperty("modifiedBy"))
-           .addProjection(AuditEntity.revisionType())
-           .getResultList();
-	
-	return revisions;
-}
+
 	
 
 }

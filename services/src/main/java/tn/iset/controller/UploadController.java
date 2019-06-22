@@ -14,8 +14,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -34,8 +32,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
-import net.sf.jasperreports.components.barbecue.BarcodeProviders.NW7Provider;
-import net.sf.jasperreports.engine.JasperExportManager;
 import tn.iset.model.User;
 import tn.iset.repository.UserRepository;
 
@@ -111,8 +107,7 @@ UserRepository userRepo;
 
 			   jsonMap.put("content", encodeImage);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 		
 
@@ -129,7 +124,7 @@ UserRepository userRepo;
 		return ResponseEntity.ok().body(filename);
 
 	}
-	@PreAuthorize("hasRole('ADMIN')or hasRole('PM') or hasRole('AGENT')")
+	@PreAuthorize("hasRole('ADMIN')or hasRole('ENSEIGNANT') or hasRole('AGENT')")
 	@GetMapping("/print/{doc}")
 	@ResponseBody
 	 private HttpEntity<byte[]> getDocument(@PathVariable String doc) throws IOException{

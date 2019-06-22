@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.iset.model.Agent;
 import tn.iset.model.Role;
-import tn.iset.repository.AgentRepository;
 import tn.iset.repository.RoleRepository;
 
 @CrossOrigin("*")
@@ -34,7 +32,7 @@ public class RoleController {
 		this.roleRepository = roleRepository;
 	}
 	@GetMapping
-	@PreAuthorize("hasRole('ADMIN')or hasRole('PM')")
+	@PreAuthorize("hasRole('ADMIN')or hasRole('ENSEIGNANT')")
 	public List<Role> getAll() {
 		return roleRepository.findAll();
 	}

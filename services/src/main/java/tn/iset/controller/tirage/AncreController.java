@@ -23,9 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.iset.model.tirage.Ancre;
-import tn.iset.model.tirage.Recharge;
 import tn.iset.repository.tirage.AncreRepository;
-import tn.iset.repository.tirage.RechargeRepository;
 
  @CrossOrigin("*")
 
@@ -36,8 +34,7 @@ import tn.iset.repository.tirage.RechargeRepository;
 
 	@Autowired
 	private AncreRepository ancrerepo;
-	@Autowired
-	private RechargeRepository rechargeRepository;
+	
 	@Autowired
 	private EntityManager entityManager;
 
@@ -85,20 +82,6 @@ import tn.iset.repository.tirage.RechargeRepository;
 	        ancrerepo.deleteById(id);
 	    }
 			    
-		@GetMapping("/history")
-		@ResponseBody
-		public List gethistory(){
-			List revisions = AuditReaderFactory.get(entityManager)
-		            .createQuery()
-		            .forRevisionsOfEntity(Ancre.class, false, true)
-		            //.addProjection(AuditEntity.id())
-		            .addProjection( AuditEntity.revisionProperty("timestamp"))
-		            .addProjection(AuditEntity.revisionProperty("modifiedBy"))
-		            .addProjection(AuditEntity.revisionType())
-		            .getResultList();
-			
-			return revisions;
-		}
 	
 
 }

@@ -1,18 +1,11 @@
 package tn.iset.controller.tirage;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
 import javax.validation.Valid;
 
-import org.hibernate.envers.AuditReaderFactory;
-import org.hibernate.envers.query.AuditEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -53,8 +46,7 @@ public class EnseignementController  {
 
 	@Autowired
 	private EnseignementRepository enseignementRepository ;
-	@Autowired
-	private EntityManager entityManager;
+	
 
 	@Autowired
 	private DepartementRepository departementRepository;
@@ -76,7 +68,7 @@ public class EnseignementController  {
 	}
 	
 	@GetMapping
-	@PreAuthorize("hasRole('ADMIN')or hasRole('PM')or hasRole('AGENT')")
+	@PreAuthorize("hasRole('ADMIN')or hasRole('ENSEIGNANT')or hasRole('AGENT')")
 	public List<Enseignement> getAll() {
 		
 		return enseignementRepository.findAll();
@@ -157,18 +149,5 @@ public List getUser(@Valid @PathVariable String username) {
 	return enseignementRepository.getEns(username,s,a);
 }
 	    
-@GetMapping("/history")
-@ResponseBody
-public List gethistory(){
-	List revisions = AuditReaderFactory.get(entityManager)
-           .createQuery()
-           .forRevisionsOfEntity(Enseignement.class, false, true)
-           //.addProjection(AuditEntity.id())
-           .addProjection( AuditEntity.revisionProperty("timestamp"))
-           .addProjection(AuditEntity.revisionProperty("modifiedBy"))
-           .addProjection(AuditEntity.revisionType())
-           .getResultList();
-	
-	return revisions;
-}}
+}
 	

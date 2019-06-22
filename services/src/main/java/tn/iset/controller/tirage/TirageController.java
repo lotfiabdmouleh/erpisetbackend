@@ -3,11 +3,8 @@ package tn.iset.controller.tirage;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
 import javax.validation.Valid;
 
-import org.hibernate.envers.AuditReaderFactory;
-import org.hibernate.envers.query.AuditEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -56,9 +53,7 @@ public class TirageController  {
 
 	@Autowired
 	private AgentTirageRepository agentTirageRepository ;
-	
-	@Autowired
-	private EntityManager entityManager;
+
 
 	public TirageController (TirageRepository tirageRepository) {
 		super();
@@ -149,18 +144,4 @@ public class TirageController  {
 	    }
 	    
 	    
-	    
-@GetMapping("/history")
-@ResponseBody
-public List gethistory(){
-	List revisions = AuditReaderFactory.get(entityManager)
-           .createQuery()
-           .forRevisionsOfEntity(Tirage.class, false, true)
-           //.addProjection(AuditEntity.id())
-           .addProjection( AuditEntity.revisionProperty("timestamp"))
-           .addProjection(AuditEntity.revisionProperty("modifiedBy"))
-           .addProjection(AuditEntity.revisionType())
-           .getResultList();
-	
-	return revisions;
-}}
+}

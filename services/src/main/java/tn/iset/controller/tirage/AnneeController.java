@@ -39,7 +39,7 @@ public class AnneeController {
 	private EntityManager entityManager;
 
 	@GetMapping
-	@PreAuthorize("hasRole('ADMIN')or hasRole('PM')or hasRole('AGENT')")
+	@PreAuthorize("hasRole('ADMIN')or hasRole('ENSEIGNANT')or hasRole('AGENT')")
 	public List<Annee> getAll() {
 		
 		return anneeRepository.findAll();
@@ -74,19 +74,5 @@ public class AnneeController {
 	    public void delete(@PathVariable Long id) {
 	    	anneeRepository.deleteById(id);
 	    }
-	    
-@GetMapping("/history")
-@ResponseBody
-public List gethistory(){
-	List revisions = AuditReaderFactory.get(entityManager)
-            .createQuery()
-            .forRevisionsOfEntity(Annee.class, false, true)
-            //.addProjection(AuditEntity.id())
-            .addProjection( AuditEntity.revisionProperty("timestamp"))
-            .addProjection(AuditEntity.revisionProperty("modifiedBy"))
-            .addProjection(AuditEntity.revisionType())
-            .getResultList();
-	
-	return revisions;
-}
+
 }

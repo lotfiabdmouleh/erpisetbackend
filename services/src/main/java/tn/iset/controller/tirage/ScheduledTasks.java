@@ -16,13 +16,12 @@ import tn.iset.repository.tirage.TirageRepository;
 
 @Component
 public class ScheduledTasks {
-	List<DemandeTirage> l=new ArrayList();
+	List<DemandeTirage> l=new ArrayList<DemandeTirage>();
 		@Autowired
 		private TirageRepository tirageRepository;
 		@Autowired
 		private DemandeTirageRepository demandeTirageRepository;
-		@Autowired
-		private TirageController tirageController;
+	
 		@Autowired
 		private JdbcTemplate jdbcTemplate;
 		

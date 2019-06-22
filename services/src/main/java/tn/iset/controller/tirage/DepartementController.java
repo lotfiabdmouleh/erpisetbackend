@@ -43,7 +43,7 @@ public class DepartementController  {
 		this.departementRepository = departementRepository;
 	}
 	@GetMapping
-	@PreAuthorize("hasRole('ADMIN')or hasRole('PM')or hasRole('AGENT')")
+	@PreAuthorize("hasRole('ADMIN')or hasRole('ENSEIGNANT')or hasRole('AGENT')")
 	public List<Departement> getAll() {
 		
 		return departementRepository.findAll();
@@ -80,20 +80,6 @@ public class DepartementController  {
 	    	departementRepository.deleteById(id);
 	    }
 	   
-	    
-@GetMapping("/history")
-@ResponseBody
-public List gethistory(){
-	List revisions = AuditReaderFactory.get(entityManager)
-           .createQuery()
-           .forRevisionsOfEntity(Departement.class, false, true)
-           //.addProjection(AuditEntity.id())
-           .addProjection( AuditEntity.revisionProperty("timestamp"))
-           .addProjection(AuditEntity.revisionProperty("modifiedBy"))
-           .addProjection(AuditEntity.revisionType())
-           .getResultList();
-	
-	return revisions;
-}
+
 }
 	

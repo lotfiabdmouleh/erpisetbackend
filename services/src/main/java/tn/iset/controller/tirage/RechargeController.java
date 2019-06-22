@@ -3,11 +3,8 @@ package tn.iset.controller.tirage;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
 import javax.validation.Valid;
 
-import org.hibernate.envers.AuditReaderFactory;
-import org.hibernate.envers.query.AuditEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.iset.model.tirage.Ancre;
@@ -46,7 +42,6 @@ public class RechargeController  {
 	@Autowired
 	private RechargeRepository rechargeRepository ;
 	@Autowired
-	private EntityManager entityManager;
 
 	public RechargeController ( RechargeRepository rechargeRepository) {
 		super();
@@ -106,17 +101,4 @@ public class RechargeController  {
 	    	rechargeRepository.deleteById(id);
 	    }
 	    
-		@GetMapping("/history")
-		@ResponseBody
-		public List gethistory(){
-			List revisions = AuditReaderFactory.get(entityManager)
-		           .createQuery()
-		           .forRevisionsOfEntity(Recharge.class, false, true)
-		           //.addProjection(AuditEntity.id())
-		           .addProjection( AuditEntity.revisionProperty("timestamp"))
-		           .addProjection(AuditEntity.revisionProperty("modifiedBy"))
-		           .addProjection(AuditEntity.revisionType())
-		           .getResultList();
-			
-			return revisions;
-		}}
+		}

@@ -44,7 +44,7 @@ public class MatiereController  {
 		this.matiereRepository = matiereRepository;
 	}
 	@GetMapping
-	@PreAuthorize("hasRole('ADMIN')or hasRole('PM')or hasRole('AGENT')")
+	@PreAuthorize("hasRole('ADMIN')or hasRole('ENSEIGNANT')or hasRole('AGENT')")
 	public List<Matiere> getAll() {
 		
 		return matiereRepository.findAll();
@@ -87,7 +87,6 @@ public class MatiereController  {
 			List revisions = AuditReaderFactory.get(entityManager)
 		           .createQuery()
 		           .forRevisionsOfEntity(Matiere.class, false, true)
-		           //.addProjection(AuditEntity.id())
 		           .addProjection( AuditEntity.revisionProperty("timestamp"))
 		           .addProjection(AuditEntity.revisionProperty("modifiedBy"))
 		           .addProjection(AuditEntity.revisionType())

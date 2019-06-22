@@ -16,7 +16,7 @@ public class TestRestAPIs {
 	}
 
 	@GetMapping("/api/test/pm")
-	@PreAuthorize("hasRole('PM') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ENSEIGNANT') or hasRole('ADMIN')")
 	public String projectManagementAccess() {
 		return ">>> Project Management Board";
 	}
